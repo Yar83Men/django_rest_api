@@ -1,0 +1,19 @@
+********** Serializer ************
+python manage.py shell
+from App.models import Article
+from App.serializers import ArticleSerializer
+from rest_framework.renderers import JSONRenderer
+from rest_framework.parsers import JSONParser
+a = Article(title='Artcile title', author='Yar83Men', email='mail@mail.ru')
+a.save()
+b = Article(title='Second Article', author='Arny', email='yandex@mail.com')
+b.save()
+serializer = ArticleSerializer(a)
+serializer.data
+content = JSONRenderer().render(serializer.data)
+
+serializer = ArticleSerializer(Article.objects.all(), many=True)
+serializer.data
+******************************************************************
+s = ArticleSerializer()
+print(repr(s))
